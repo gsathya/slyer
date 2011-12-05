@@ -11,16 +11,25 @@ def parse_header(raw_header):
 
         return parsed_header
 
-def parse_config(config_file):
-    config = ConfigParser.ConfigParser()
-    config.read(config.file)
+def parse_config(config_filename):
+    configParser = ConfigParser.ConfigParser()
+    configParser.read(config_filename)
 
-    parsed_config = {}
-    for section in config.sections():
-        entries = config.items(section)
+    config = {}
+    for section in configParser.sections():
+        entries = configParser.items(section)
 
         for (key, value) in entries:
-            parsed_config[key] = value
+            config[key] = value
 
-    return parsed_config
+    return config
 
+def textile(content):
+    from textile import textile
+    return textile(content)
+
+def render(content, format):
+    if format is "textile":
+        outbuf = textile(content)
+
+    return outbuf
