@@ -11,6 +11,7 @@ class BlogEntry:
         self._load()
 
         myLookup = TemplateLookup(directories=['.'], output_encoding='utf-8', encoding_errors='replace')
+
         self.template = Template(filename = os.path.join("design",self.config['theme'],'single.html'), lookup = myLookup)
 
         self.render()
@@ -21,27 +22,29 @@ class BlogEntry:
         config_filename = "config.ini"
         self.config = util.parse_config(config_filename)
 
-        self._logger = self.logger()
-        self._logger.info("Loaded config")
+        #Set up logging
+        self._logger()
+        self.logger.info("Loaded config")
 
         #Read file and store header and content
         with open(self.name,'r') as f:
             self.raw_header, self.raw_content = f.read().split('---')
-        self._logger.info("Read raw header and content")
+        self.logger.info("Read raw header and content")
 
         self.header = util.parse_header(self.raw_header)
-        self._logger.info("Parsed header into a dict")
+        self.logger.info("Parsed header into a dict")
 
-    def logger(self):
+
+    def _logger(self):
         import logging
 
         # create logger
-        logger = logging.getLogger('blog')
+        self.logger = logging.getLogger('blog')
 
         numeric_level = getattr(logging, self.config['loglevel'].upper(), None)
         if not isinstance(numeric_level, int):
             raise ValueError('Invalid log level: %s' % loglevel)
-        logger.setLevel(numeric_level)
+        self.logger.setLevel(numeric_level)
 
         # create blog handler and set level to debug
         fh = logging.FileHandler(self.config['logfile'])
@@ -53,16 +56,14 @@ class BlogEntry:
         # add formatter to ch
         fh.setFormatter(formatter)
 
-        # add ch to logger
-        logger.addHandler(fh)
+        # add ch to self.logger
+        self.logger.addHandler(fh)
 
-        return logger
 
     def update_header(self):
         pass
 
     def render(self):
-        print "Rendering"
         with open("sample1.html",'w') as outfh:
             outfh.write(self.template.render(html_content=self.raw_content))
 
