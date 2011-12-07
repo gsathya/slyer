@@ -62,5 +62,5 @@ class BlogIndex:
     def _render(self):
         self.html_content = util.render(self.raw_content,
                                         self.config['format'].lower(), self.config['linenos'].lower())
-        with open("sample1.html",'w') as outfh:
+        with open("SampleIndex.html",'w') as outfh:
             outfh.write(self.template.render(html_content=self.html_content))
