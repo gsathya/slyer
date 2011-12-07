@@ -33,3 +33,31 @@ def render(content, format):
         outbuf = textile(content)
 
     return outbuf
+
+def pygmentify(content):
+    from pygments import highlight
+    from pygments.lexers import get_lexer_by_name, guess_lexer, guess_lexer_for_filename
+    from pygments.formatters import HtmlFormatter
+    from BeautifulSoup import BeautifulSoup
+
+    formatter = HtmlFormatter(linenos=True, cssclass="codehilite")
+
+    try:
+        soup = BeautifulSoup(content)
+        code_blocks = soup.findAll('code')
+
+        for code in code_blocks:
+            try:
+                language = code['language']
+                lexer = get_lexer_by_name(language, stripAll=True)
+
+            except KeyError:
+                lexer = guess_lexer(code.string, stripAll=True)
+
+            code.replaceWith(highlight(code.string, lexer, formatter)
+        return str(soup)
+
+    except:
+        return value.replace('<code>', '<div class="highlight"><pre>').replace('</code>', '</pre></div>')
+
+

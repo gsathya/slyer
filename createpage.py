@@ -16,7 +16,7 @@ class BlogEntry:
 
         self.render()
 
-        print "DONE!"
+        self.logger.info("Done")
 
     def _load(self):
         config_filename = "config.ini"
@@ -48,7 +48,7 @@ class BlogEntry:
 
         # create blog handler and set level to debug
         fh = logging.FileHandler(self.config['logfile'])
-        fh.setLevel(logging.DEBUG)
+        fh.setLevel(numeric_level)
 
         # create formatter
         formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
