@@ -85,6 +85,10 @@ hr {
     padding : 2px 0 0;
 }
 
+table{
+ background-color: "black"
+}
+
 .button{
 width:8px;
 height:8px;

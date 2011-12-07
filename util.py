@@ -8,7 +8,6 @@ def parse_header(raw_header):
         except ValueError:
             raise Exception("The header %s is not in proper format, Use 'Key:Value' format" % line)
         parsed_header[key] = value
-
         return parsed_header
 
 def parse_config(config_filename):
@@ -18,30 +17,35 @@ def parse_config(config_filename):
     config = {}
     for section in configParser.sections():
         entries = configParser.items(section)
-
         for (key, value) in entries:
             config[key] = value
 
     return config
 
-def textile(content):
+def textile(content, linenos):
     from textile import textile
-    return textile(content)
+    return pygmentify(textile(content), linenos)
 
-def render(content, format):
+
+def render(content, format=None, linenos=False):
+    if linenos is "true":
+        linenos = True
+    else:
+        linenos = False
+
     if format is "textile":
-        outbuf = textile(content)
+        html_content = textile(content, linenos)
+    else:
+        html_content = textile(content, linenos)
+    return html_content
 
-    return outbuf
-
-def pygmentify(content):
+def pygmentify(content, linenos):
     from pygments import highlight
-    from pygments.lexers import get_lexer_by_name, guess_lexer, guess_lexer_for_filename
+    from pygments.lexers import get_lexer_by_name, guess_lexer
     from pygments.formatters import HtmlFormatter
     from BeautifulSoup import BeautifulSoup
 
-    formatter = HtmlFormatter(linenos=True, cssclass="codehilite")
-
+    formatter = HtmlFormatter(linenos=linenos, cssclass="codehilite")
     try:
         soup = BeautifulSoup(content)
         code_blocks = soup.findAll('code')
@@ -50,14 +54,16 @@ def pygmentify(content):
             try:
                 language = code['language']
                 lexer = get_lexer_by_name(language, stripAll=True)
-
             except KeyError:
                 lexer = guess_lexer(code.string, stripAll=True)
-
-            code.replaceWith(highlight(code.string, lexer, formatter)
+            code.replaceWith(highlight(code.string, lexer, formatter))
         return str(soup)
-
     except:
-        return value.replace('<code>', '<div class="highlight"><pre>').replace('</code>', '</pre></div>')
+        return content.replace('<code>', '<pre>').replace('</code>', '</pre>')
 
+def create_link(title):
+    #Replace all non-word chars with '-'
+    link = re.sub(r'\W+', '-', title.lower())
+    #Replace multiple '-' with single '-', use only first 30 chars
+    return re.sub(r'-+', '-', link).strip('-')[:30]
 

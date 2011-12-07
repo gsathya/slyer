@@ -2,6 +2,7 @@
 ** TODO Figure out a name
 *** Choices :
 lowslain - sounds dumb
+madrobin - sounds .. meh
 
 ** TODO Implement cache
 *** Implementation :
@@ -9,12 +10,12 @@ lowslain - sounds dumb
     2. Set 'published' flag in header
     3. Search for flags like 'date published'
 
-** TODO Implement pygments
+** DONE Implement pygments
    - For syntax highlighting
 
-** TODO Url creation
-   - /date/title.html
-     (/2009-12-09/foobar.html)
+** DONE Url creation
+   - /title.html
+     (/foobar.html)
 
 ** TODO Index page creation
    - Contains list of all the blog/journal entries
@@ -34,3 +35,9 @@ lowslain - sounds dumb
 
 ** TODO Themes
    - Create one more theme
+
+** TODO Archive
+
+** TODO Date published
+
+** TODO RSS

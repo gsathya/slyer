@@ -4,8 +4,8 @@ import util
 import os
 
 
-class BlogEntry:
-    def __init__(self, filename):
+class BlogIndex:
+    def __init__(self, foldername):
         self.root = os.path.abspath(os.path.dirname(__file__))
         self.name = filename
         self._load()
@@ -13,7 +13,7 @@ class BlogEntry:
         myLookup = TemplateLookup(directories=['.'],
                                   output_encoding='utf-8', encoding_errors='replace')
 
-        self.template = Template(filename = os.path.join("design",self.config['theme'],'single.html'), lookup = myLookup)
+        self.template = Template(filename = os.path.join("design",self.config['theme'],'index.html'), lookup = myLookup)
 
         self._render()
 
@@ -34,7 +34,6 @@ class BlogEntry:
 
         self.header = util.parse_header(self.raw_header)
         self.logger.info("Parsed header into a dict")
-
 
     def _logger(self):
         import logging
@@ -60,16 +59,8 @@ class BlogEntry:
         # add ch to self.logger
         self.logger.addHandler(fh)
 
-
-    def update_header(self):
-        pass
-
     def _render(self):
         self.html_content = util.render(self.raw_content,
                                         self.config['format'].lower(), self.config['linenos'].lower())
         with open("sample1.html",'w') as outfh:
             outfh.write(self.template.render(html_content=self.html_content))
-
-if __name__=="__main__":
-    entry = BlogEntry("test.txt")
-
