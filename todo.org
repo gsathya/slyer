@@ -27,12 +27,13 @@ slyer?
    - Specify image url, new size
      (img : path/to/file, 25, 25)
 
-** TODO Comments implementation
+** DONE Comments implementation
    - Disqus?
 
 ** TODO Google analytics
    - Just use the JavaScript file
-   - Implement modular one - have id entry in config file
+   - Implement modular one - have id entry in config file - Meh not
+     worth it
 
 ** TODO Themes
    - Create one more theme
@@ -40,5 +41,8 @@ slyer?
 ** TODO Archive
 
 ** TODO Date published
-
+** TODO Tags
 ** TODO RSS
+** TODO Javascript libs
+   - [ ] Lightbox2
+   - [ ]

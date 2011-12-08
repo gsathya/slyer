@@ -3,6 +3,8 @@ from mako.lookup import TemplateLookup
 import util
 import os
 import logging
+import time
+from datetime import datetime
 
 class BlogEntry:
     def __init__(self, filename):
@@ -36,6 +38,11 @@ class BlogEntry:
         self.logger.info("Parsed header into a dict")
 
     def update_header(self):
+        self.header['link'] = util.create_link(self.header['title'])
+        self.header['timestamp'] = time.time()
+        self.header['date'] = datetime.now().strftime("%A, %B %d, %Y")
+
+    def write_header(self):
         pass
 
     def _render(self):
