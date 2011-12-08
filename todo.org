@@ -40,9 +40,15 @@ slyer?
 
 ** TODO Archive
 
+** DONE Header
+   - [X] Update - Add link, datepublished, timestamp
+   - [X] Write the updated header
+
 ** TODO Date published
 ** TODO Tags
 ** TODO RSS
 ** TODO Javascript libs
    - [ ] Lightbox2
    - [ ]
+
+** TODO Add clean() function to remove header

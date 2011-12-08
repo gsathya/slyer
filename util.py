@@ -4,11 +4,11 @@ def parse_header(raw_header):
     parsed_header = {}
     for line in raw_header.splitlines():
         try:
-            (key, value) = line.split(":",1)
+            (key, value) = line.split(":")
         except ValueError:
             raise Exception("The header %s is not in proper format, Use 'Key:Value' format" % line)
-        parsed_header[key] = value
-        return parsed_header
+        parsed_header[key.strip()] = value.strip()
+    return parsed_header
 
 def parse_config(config_filename):
     configParser = ConfigParser.ConfigParser()
@@ -62,6 +62,8 @@ def pygmentify(content, linenos):
         return content.replace('<code>', '<pre>').replace('</code>', '</pre>')
 
 def create_link(title):
+    import re
+
     #Replace all non-word chars with '-'
     link = re.sub(r'\W+', '-', title.lower())
     #Replace multiple '-' with single '-', use only first 30 chars
