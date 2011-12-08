@@ -3,6 +3,7 @@
 *** Choices :
 lowslain - sounds dumb
 madrobin - sounds .. meh
+slyer?
 
 ** TODO Implement cache
 *** Implementation :

@@ -24,7 +24,7 @@ class BlogIndex:
         self.config = util.parse_config(config_filename)
 
         #Set up logging
-        self._logger()
+        self.logger = util.logger(self.config['loglevel'], self.config['logfile'])
         self.logger.info("Loaded config")
 
         #Read file and store header and content
@@ -34,30 +34,6 @@ class BlogIndex:
 
         self.header = util.parse_header(self.raw_header)
         self.logger.info("Parsed header into a dict")
-
-    def _logger(self):
-        import logging
-
-        # create logger
-        self.logger = logging.getLogger('blog')
-
-        numeric_level = getattr(logging, self.config['loglevel'].upper(), None)
-        if not isinstance(numeric_level, int):
-            raise ValueError('Invalid log level: %s' % loglevel)
-        self.logger.setLevel(numeric_level)
-
-        # create blog handler and set level to debug
-        fh = logging.FileHandler(self.config['logfile'])
-        fh.setLevel(numeric_level)
-
-        # create formatter
-        formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
-
-        # add formatter to ch
-        fh.setFormatter(formatter)
-
-        # add ch to self.logger
-        self.logger.addHandler(fh)
 
     def _render(self):
         self.html_content = util.render(self.raw_content,

@@ -67,3 +67,29 @@ def create_link(title):
     #Replace multiple '-' with single '-', use only first 30 chars
     return re.sub(r'-+', '-', link).strip('-')[:30]
 
+
+
+def logger(loglevel, logfile):
+    import logging
+
+    # create logger
+    logger = logging.getLogger('blog')
+
+    numeric_level = getattr(logging, loglevel.upper(), None)
+    if not isinstance(numeric_level, int):
+        raise ValueError('Invalid log level: %s' % loglevel)
+    logger.setLevel(numeric_level)
+
+    # create blog handler and set level to debug
+    fh = logging.FileHandler(logfile)
+    fh.setLevel(numeric_level)
+
+    # create formatter
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+
+    # add formatter to ch
+    fh.setFormatter(formatter)
+
+    # add ch to logger
+    logger.addHandler(fh)
+    return logger
