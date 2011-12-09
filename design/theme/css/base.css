@@ -85,15 +85,35 @@ hr {
     padding : 2px 0 0;
 }
 
-table{
- background-color: "black"
+.highlighttable, .codehilitetable, .codehilite > pre {
+    margin: 0.5em 0 1em 0;
+    width: 100%;
 }
 
-.button{
-width:8px;
-height:8px;
-border-radius:4px;
--moz-border-radius:4px;
--webkit-border-radius:4px;
--khtml-border-radius:4px;
-background-color :#369}
+.highlighttable td, .codehilitetable td {
+    padding: 4px 8px;
+}
+
+div > div.codehilite > pre {
+    padding: 8px;
+}
+.highlighttable pre, .codehilitetable pre {
+    margin: 4px 0;
+}
+
+.highlighttable .code, .codehilitetable .code, .codehilite {
+    background-color: #333;
+}
+
+div.linenodiv {
+    color: #aaa;
+}
+
+td.linenos {
+    width: 30px;
+    text-align: right;
+}
+
+td.code {
+    width: auto;
+}
