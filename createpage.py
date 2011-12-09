@@ -44,7 +44,8 @@ class BlogEntry:
         self.logger.info("Parsed header into a dict")
 
     def update_header(self):
-        self.header['link'] = util.create_link(self.header['title'])
+        self.header['output_filename'] = util.create_link(self.header['title'])
+        self.header['permalink'] = self.config['url']+self.config['dir']+self.header['output_filename']+".html"
         self.header['timestamp'] = time.time()
         self.header['date'] = datetime.now().strftime("%A, %B %d, %Y")
 
@@ -59,7 +60,7 @@ class BlogEntry:
     def _render(self):
         self.html_content = util.render(self.raw_content,
                                         self.config['format'].lower(), self.config['linenos'].lower())
-        with open(self.header['link']+".html",'w') as page:
+        with open(self.header['output_filename']+".html",'w') as page:
             page.write(self.template.render(html_content=self.html_content))
 
 
