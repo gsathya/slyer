@@ -28,7 +28,7 @@ def textile(content, linenos):
 
 
 def render(content, format=None, linenos=False):
-    if linenos is "true":
+    if linenos == "true":
         linenos = True
     else:
         linenos = False
@@ -96,3 +96,8 @@ def logger(loglevel, logfile):
     logger.addHandler(fh)
     return logger
 
+def isdraft(publish):
+    if publish == "Yes":
+        return True
+    else:
+        return False

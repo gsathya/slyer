@@ -44,11 +44,26 @@ slyer?
    - [X] Update - Add link, datepublished, timestamp
    - [X] Write the updated header
 
-** TODO Date published
+** DONE Date published
+
 ** TODO Tags
+   - what should i do with tags?
+
 ** TODO RSS
+   - wtf is RSS?
+
 ** TODO Javascript libs
    - [ ] Lightbox2
-   - [ ]
 
 ** TODO Add clean() function to remove header
+
+** TODO Add more themes to pygments
+
+** DONE Implement draft/publish functionality
+   - Render only if "publish" flag is set
+
+** TODO Implement Dierectory structure
+
+** TODO Pass context to mako, not just content
+
+** TODO Write test to check concurrency of /posts and /drafts
