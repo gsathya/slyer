@@ -7,9 +7,7 @@ slyer?
 
 ** TODO Implement cache
 *** Implementation :
-    1. Using SHA1/MD5
-    2. Set 'published' flag in header
-    3. Search for flags like 'date published'
+    - [ ] SHA1/MD5
 
 ** DONE Implement pygments
    - For syntax highlighting
@@ -18,14 +16,8 @@ slyer?
    - /title.html
      (/foobar.html)
 
-** TODO Index page creation
+** DONE Index page creation
    - Contains list of all the blog/journal entries
-
-** TODO PIL implementation
-   - Thumbnail creation
-   - Resize images
-   - Specify image url, new size
-     (img : path/to/file, 25, 25)
 
 ** DONE Comments implementation
    - Disqus?
@@ -64,6 +56,6 @@ slyer?
 
 ** TODO Implement Dierectory structure
 
-** TODO Pass context to mako, not just content
+** TODO Pass context to mako, not just html_content
 
 ** TODO Write test to check concurrency of /posts and /drafts

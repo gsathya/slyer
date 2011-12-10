@@ -22,7 +22,7 @@ class BlogEntry:
         self.template = Template(filename = os.path.join("design",self.config['theme'],'single.html'), lookup = myLookup)
 
         self.update_header()
-        #self.write_header()
+        self.write_header()
         self._render()
 
         self.logger.info("Done")
@@ -65,6 +65,8 @@ class BlogEntry:
 
 
 if __name__=="__main__":
-    entry = BlogEntry("drafts/test.txt")
+  listing = os.listdir('drafts')
+  for infile in listing:
+      entry = BlogEntry(os.path.join('drafts', infile))
 
 

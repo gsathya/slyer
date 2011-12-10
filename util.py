@@ -1,10 +1,11 @@
 import ConfigParser
+import re
 
 def parse_header(raw_header):
     parsed_header = {}
     for line in raw_header.splitlines():
         try:
-            (key, value) = line.split(":")
+            (key, value) = line.split(":", 1)
         except ValueError:
             raise Exception("The header %s is not in proper format, Use 'Key:Value' format" % line)
         parsed_header[key.strip()] = value.strip()
@@ -28,7 +29,7 @@ def textile(content, linenos):
 
 
 def render(content, format=None, linenos=False):
-    if linenos == "true":
+    if re.match(linenos, "true", re.I) is not None:
         linenos = True
     else:
         linenos = False
@@ -97,7 +98,7 @@ def logger(loglevel, logfile):
     return logger
 
 def isdraft(publish):
-    if publish == "Yes":
+    if re.match("yes", publish, re.I):
         return True
     else:
         return False
