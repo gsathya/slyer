@@ -58,4 +58,4 @@ slyer?
 
 ** TODO Pass context to mako, not just html_content
 
-** TODO Write test to check concurrency of /posts and /drafts
+** DONE Write test to check concurrency of /posts and /drafts

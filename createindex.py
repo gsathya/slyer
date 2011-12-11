@@ -3,6 +3,7 @@ from mako.lookup import TemplateLookup
 import util
 import os
 
+
 class BlogIndex:
     def __init__(self):
         self.root = os.path.abspath(os.path.dirname(__file__))
@@ -12,7 +13,7 @@ class BlogIndex:
         myLookup = TemplateLookup(directories=['.'],
                                   output_encoding='utf-8', encoding_errors='replace')
 
-        self.template = Template(filename = os.path.join("design",self.config['theme'],'index.html'), lookup = myLookup)
+        self.template = Template(filename=os.path.join("design", self.config['theme'], 'index.html'), lookup=myLookup)
 
         self._walk()
         self._render()
@@ -27,15 +28,15 @@ class BlogIndex:
 
     def _render(self):
         # Send date, permalink, filepath, title
-        with open("SampleIndex.html",'w') as outfh:
+        with open("SampleIndex.html", 'w') as outfh:
             outfh.write(self.template.render(entries=self.entries))
         self.logger.info("Done")
 
     def _walk(self):
         # Walk through /drafts to check for published posts and add its context
-        listing = os.listdir(self.config['drafts'])
+        listing = os.listdir('drafts')
         for infile in listing:
-            with open(os.path.join(self.config['drafts'], infile), 'r') as f:
+            with open(os.path.join('drafts', infile), 'r') as f:
                 raw_header, raw_content = f.read().split('---')
 
             header = util.parse_header(raw_header)
@@ -44,5 +45,5 @@ class BlogIndex:
 
         print self.entries
 
-if __name__=="__main__":
+if __name__ == "__main__":
     index = BlogIndex()

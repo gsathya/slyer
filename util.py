@@ -2,6 +2,7 @@ import ConfigParser
 import re
 import os
 
+
 def parse_header(raw_header):
     parsed_header = {}
     for line in raw_header.splitlines():
@@ -11,6 +12,7 @@ def parse_header(raw_header):
             raise Exception("The header %s is not in proper format, Use 'Key:Value' format" % line)
         parsed_header[key.strip()] = value.strip()
     return parsed_header
+
 
 def parse_config(config_filename):
     configParser = ConfigParser.ConfigParser()
@@ -23,6 +25,7 @@ def parse_config(config_filename):
             config[key] = value
 
     return config
+
 
 def textile(content, linenos):
     from textile import textile
@@ -40,6 +43,7 @@ def render(content, format=None, linenos=False):
     else:
         html_content = textile(content, linenos)
     return html_content
+
 
 def pygmentify(content, linenos):
     from pygments import highlight
@@ -63,6 +67,7 @@ def pygmentify(content, linenos):
     except:
         return content.replace('<code>', '<pre>').replace('</code>', '</pre>')
 
+
 def create_link(title):
     import re
 
@@ -70,7 +75,6 @@ def create_link(title):
     link = re.sub(r'\W+', '-', title.lower())
     #Replace multiple '-' with single '-', use only first 30 chars
     return re.sub(r'-+', '-', link).strip('-')[:30]
-
 
 
 def logger(loglevel, logfile):
@@ -98,11 +102,13 @@ def logger(loglevel, logfile):
     logger.addHandler(fh)
     return logger
 
+
 def isdraft(publish):
     if re.match("yes", publish, re.I):
         return True
     else:
         return False
+
 
 def _clean(listing):
     for infile in listing:
@@ -116,14 +122,15 @@ def _clean(listing):
                 try:
                     del parsed_header[key]
                 except KeyError:
-                    raise Exception("%s is not in the map" %key)
+                    raise Exception("%s is not in the map" % key)
             parsed_header['publish'] = "no"
             f.seek(0)
             for key, value in parsed_header.items():
-                f.write(str(key)+" : "+str(value)+"\n")
+                f.write(str(key) + " : " + str(value) + "\n")
             f.write("---")
             f.write(content)
     return True
+
 
 def clean(all=True, filenames=None):
     if all and filenames is None:
@@ -133,6 +140,7 @@ def clean(all=True, filenames=None):
         _clean(filenames)
     else:
         return False
+
 
 def issync():
     # Check if all published posts have correct entries in /drafs and /posts
