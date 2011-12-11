@@ -1,5 +1,6 @@
 import ConfigParser
 import re
+import os
 
 def parse_header(raw_header):
     parsed_header = {}
@@ -100,5 +101,35 @@ def logger(loglevel, logfile):
 def isdraft(publish):
     if re.match("yes", publish, re.I):
         return True
+    else:
+        return False
+
+def _clean(listing):
+    for infile in listing:
+        with open(os.path.join('drafts', infile), 'r+') as f:
+            header, content = f.read().split('---')
+            parsed_header = parse_header(header)
+            # Remove output_filename, permalink, timestamp, date
+            # Change publish to "no"
+            headers_to_remove = ["output_filename", "permalink", "timestamp", "date"]
+            for key in headers_to_remove:
+                try:
+                    del parsed_header[key]
+                except KeyError:
+                    raise Exception("%s is not in the map" %key)
+            parsed_header['publish'] = "no"
+            f.seek(0)
+            for key, value in parsed_header.items():
+                f.write(str(key)+" : "+str(value)+"\n")
+            f.write("---")
+            f.write(content)
+    return True
+
+def clean(all=True, filenames=None):
+    if all and filenames is None:
+        listing = os.listdir('drafts')
+        _clean(listing)
+    elif not all and filenames is not None:
+        _clean(filenames)
     else:
         return False

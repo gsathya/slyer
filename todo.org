@@ -47,7 +47,7 @@ slyer?
 ** TODO Javascript libs
    - [ ] Lightbox2
 
-** TODO Add clean() function to remove header
+** DONE Add clean() function to remove header
 
 ** TODO Add more themes to pygments
 

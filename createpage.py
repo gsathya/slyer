@@ -65,8 +65,7 @@ class BlogEntry:
 
 
 if __name__=="__main__":
-  listing = os.listdir('drafts')
-  for infile in listing:
-      entry = BlogEntry(os.path.join('drafts', infile))
-
+    listing = os.listdir('drafts')
+    for infile in listing:
+        entry = BlogEntry(os.path.join('drafts', infile))
 
