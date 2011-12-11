@@ -133,3 +133,22 @@ def clean(all=True, filenames=None):
         _clean(filenames)
     else:
         return False
+
+def issync():
+    # Check if all published posts have correct entries in /drafs and /posts
+    # Read file in /drafts
+    # Check corresponding output_filename is present in /posts
+    # Repeat, rinse, profit
+
+    posts = os.listdir("posts")
+
+    for file in os.listdir("drafts"):
+        with open(file, 'r') as f:
+            header, content = f.read().split('---')
+
+        parsed_header = parse_header(header)
+
+        if parsed_header['output_filename'] not in posts:
+            return False
+
+    return True
