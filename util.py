@@ -74,7 +74,7 @@ def create_link(title):
     #Replace all non-word chars with '-'
     link = re.sub(r'\W+', '-', title.lower())
     #Replace multiple '-' with single '-', use only first 30 chars
-    return re.sub(r'-+', '-', link).strip('-')[:30]
+    return re.sub(r'-+', '-', link).strip('-')[:30]+".html"
 
 
 def logger(loglevel, logfile):
@@ -112,23 +112,26 @@ def isdraft(publish):
 
 def _clean(listing):
     for infile in listing:
-        with open(os.path.join('drafts', infile), 'r+') as f:
+        with open(os.path.join('drafts', infile), 'r') as f:
             header, content = f.read().split('---')
-            parsed_header = parse_header(header)
-            # Remove output_filename, permalink, timestamp, date
-            # Change publish to "no"
-            headers_to_remove = ["output_filename", "permalink", "timestamp", "date"]
-            for key in headers_to_remove:
-                try:
-                    del parsed_header[key]
-                except KeyError:
-                    raise Exception("%s is not in the map" % key)
-            parsed_header['publish'] = "no"
-            f.seek(0)
+        
+        parsed_header = parse_header(header)
+        # Remove output_filename, permalink, timestamp, date
+        # Change publish to "no"
+        headers_to_remove = ["output_filename", "permalink", "timestamp", "date"]
+        for key in headers_to_remove:
+            try:
+                del parsed_header[key]
+            except KeyError:
+                raise Exception("%s is not in the map" % key)
+        parsed_header['publish'] = "no"
+
+        with open(os.path.join('drafts', infile), 'w') as f:
             for key, value in parsed_header.items():
                 f.write(str(key) + " : " + str(value) + "\n")
             f.write("---")
             f.write(content)
+
     return True
 
 
@@ -149,14 +152,15 @@ def issync():
     # Repeat, rinse, profit
 
     posts = os.listdir("posts")
-
+    
     for file in os.listdir("drafts"):
-        with open(file, 'r') as f:
-            header, content = f.read().split('---')
-
-        parsed_header = parse_header(header)
-
-        if parsed_header['output_filename'] not in posts:
-            return False
+        if file[0] is not '.':
+            with open(os.path.join("drafts", file), 'r') as f:
+                header, content = f.read().split('---')
+                
+            parsed_header = parse_header(header)
+            
+            if parsed_header['output_filename'] not in posts:
+                return False
 
     return True

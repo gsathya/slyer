@@ -1,9 +1,100 @@
-<%inherit file="base.html"/>
-<!-- Listing -->
-<div id="section-listing">
-  <ol>
-    % for entry in entries:
-    <li><a href="${entry['permalink']}">${entry['title']}</a></li>
-    % endfor
-  </ol>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Sathyanarayanan Gunsekaran</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="design/theme/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+      footer.container.navbar-fixed-top {
+      top: auto;
+      bottom: 0;
+      }
+
+    </style>
+    <link href="design/theme/css/bootstrap-responsive.css" rel="stylesheet">
+      <link rel="stylesheet" href="design/theme/css/font-awesome.css">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+  </head>
+
+  <body>
+    <div class="container">
+      <header class="jumbotron subhead" id="overview">
+        <h1>Sathya's Journal</h1>
+        <p class ="lead">Thoughts.</p>
+      </header>
+      <div class="subnav">
+        <ul class="nav nav-pills">
+          <li><a href="index.html"><i class="icon-user"></i> Journal</a></li>
+          <li><a href="https://github.com/gsathya"><i class="icon-github-sign"></i> Github</a></li>
+          <li><a href="https://twitter.com/sathya3445"><i class="icon-twitter-sign"></i> Twitter</a></li>
+          <li><a href="http://www.linkedin.com/pub/sathyanarayanan-gunasekaran/44/b59/7a9"><i class="icon-linkedin-sign"></i> Linkedin</a></li>
+          <li><a href="mailto:me@gsathya.in"><i class="icon-envelope"></i> Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container">
+      <div class="page-header">
+        <h2>Index
+        <small>stuff</small>
+        </h2>
+      </div>
+
+      <div class="row-fluid">
+        % for entry in entries:
+          <div class="span4">
+            <h2>${entry['title']}</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sem dui, faucibus interdum mollis ac, hendrerit id quam. Integer hendrerit pellentesque urna, vitae bibendum dolor faucibus vel. Morbi a lorem mattis libero suscipit varius sit amet non dui. </p>
+            <p><a class="btn" href="${entry['permalink']}">View more &raquo;</a></p>
+          </div><!--/span-->
+        % endfor
+      </div><!--/row-->
+
+
+      <footer class="container navbar navbar-fixed-top">
+      <hr/>
+      
+      <p>&copy; Sathya 2012</p>
+      </footer>
+
+
+    
+
+    </div> <!-- /container -->
+    
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="design/theme/js/jquery.js"></script>
+    <script src="design/theme/js/bootstrap-transition.js"></script>
+    <script src="design/theme/js/bootstrap-alert.js"></script>
+    <script src="design/theme/js/bootstrap-modal.js"></script>
+    <script src="design/theme/js/bootstrap-dropdown.js"></script>
+    <script src="design/theme/js/bootstrap-scrollspy.js"></script>
+    <script src="design/theme/js/bootstrap-tab.js"></script>
+    <script src="design/theme/js/bootstrap-tooltip.js"></script>
+    <script src="design/theme/js/bootstrap-popover.js"></script>
+    <script src="design/theme/js/bootstrap-button.js"></script>
+    <script src="design/theme/js/bootstrap-collapse.js"></script>
+    <script src="design/theme/js/bootstrap-carousel.js"></script>
+    <script src="design/theme/js/bootstrap-typeahead.js"></script>
+
+  </body>
+</html>
