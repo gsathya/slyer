@@ -1,8 +1,24 @@
 permalink : posts/pod.html
 title : pod
-timestamp : 1333905381.41
-publish : yes
+timestamp : 1333906951.03
 output_filename : pod.html
+publish : yes
 date : Sunday, April 08, 2012
 ---
 LOLOLOL foo
+
+<notextile>
+ <code language="python">
+        import sys
+        def main():
+            if len(sys.argv) < 2:
+            usage()
+            args = sys.argv[1:]
+            try:
+                opts, args = getopt.getopt(sys.argv[1:], opts, long_opts)
+            except getopt.GetoptError, err:
+                usage()
+                sys.exit(2)
+
+ </code>
+</notextile>

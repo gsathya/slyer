@@ -9,7 +9,7 @@
 
     <!-- Le styles -->
     
-<link href="../design/css/amelia/bootstrap.min.css" rel="stylesheet">
+<link href="../design/css/cyborg/bootstrap.min.css" rel="stylesheet">
 
     <style>
       body {
@@ -17,7 +17,9 @@
       }
     </style>
     <link href="../design/css/bootstrap-responsive.css" rel="stylesheet">
-      <link rel="stylesheet" href="../design/css/font-awesome.css">
+    <link rel="stylesheet" href="../design/pygments/tango.css">
+    <link href="" rel="stylesheet">
+    
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -64,6 +66,21 @@
 <div>
   <!-- Body -->
    <p><span class="caps">LOLOLOL</span> foo</p>
+<p><notextile>
+<div class="codehilite"><pre>        <span class="kn">import</span> <span class="nn">sys</span>
+        <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">usage</span><span class="p">()</span>
+            <span class="n">args</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">opts</span><span class="p">,</span> <span class="n">args</span> <span class="o">=</span> <span class="n">getopt</span><span class="o">.</span><span class="n">getopt</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">opts</span><span class="p">,</span> <span class="n">long_opts</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">getopt</span><span class="o">.</span><span class="n">GetoptError</span><span class="p">,</span> <span class="n">err</span><span class="p">:</span>
+                <span class="n">usage</span><span class="p">()</span>
+                <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</notextile></p>
+
+
 </div>
 
           </div>
