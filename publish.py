@@ -19,7 +19,7 @@ class BlogEntry:
         myLookup = TemplateLookup(directories=['.'],
                                   output_encoding='utf-8', encoding_errors='replace')
 
-        self.template = Template(filename=os.path.join("design", self.config['theme'], 'single.html'), lookup=myLookup)
+        self.template = Template(filename=os.path.join("design", 'single.html'), lookup=myLookup)
         self.update_header()
         self.write_header()
         self._render()
@@ -60,5 +60,5 @@ class BlogEntry:
         self.html_content = util.render(self.raw_content,
                                         self.config['format'].lower(), self.config['linenos'].lower())
         with open(os.path.join('posts', self.header['output_filename']), 'w') as page:
-            page.write(self.template.render(html_content=self.html_content))
-
+            page.write(self.template.render(select_theme=self.config['theme'],
+                                            html_content=self.html_content))

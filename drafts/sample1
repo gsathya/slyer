@@ -1,9 +1,8 @@
-permalink : posts/poda.html
-author : sat
-timestamp : 1333902835.28
-title : poda
-publish : no
-output_filename : poda.html
+permalink : posts/pod.html
+title : pod
+timestamp : 1333905381.41
+publish : yes
+output_filename : pod.html
 date : Sunday, April 08, 2012
 ---
 LOLOLOL foo

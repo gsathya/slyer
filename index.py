@@ -13,7 +13,7 @@ class BlogIndex:
         myLookup = TemplateLookup(directories=['.'],
                                   output_encoding='utf-8', encoding_errors='replace')
 
-        self.template = Template(filename=os.path.join("design", self.config['theme'], 'index.html'), lookup=myLookup)
+        self.template = Template(filename=os.path.join("design", 'index.html'), lookup=myLookup)
 
         self._walk()
         self._render()
@@ -29,7 +29,8 @@ class BlogIndex:
     def _render(self):
         # Send date, permalink, filepath, title
         with open("index.html", 'w') as outfh:
-            outfh.write(self.template.render(entries=self.entries))
+            outfh.write(self.template.render(entries=self.entries, 
+                                             select_theme=self.config['theme']))
         self.logger.info("Done")
 
     def _walk(self):
