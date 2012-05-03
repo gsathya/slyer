@@ -2,3 +2,6 @@ h3. Slyer
 
 A simple static HTML site generator written in Python
 
+h3. Use
+
+./slyer --help
